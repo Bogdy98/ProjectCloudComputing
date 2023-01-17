@@ -1,6 +1,5 @@
 # ProjectCloudComputing
 
-
     În cadrul acestui proiect am implementat patru microservicii, numite „**songs**”, „**users**”, ”**likes_and_comments**” și „**favourites**”. Serviciul ”**songs**” conține expunerea pentru crearea bazei de date și a tabelelor ”songs” și ”artists”. Pe lângă acestea, serviciul conține metodele de adăugare și citire a artiștilor, respectiv cântecelor în baza de date. 
     
    Serviciul ”**users**” gestionează operațiile asupra utilizatorilor din aplicație. Un utilizator poate alege mai multe cântece favorite prin intermediul microserviciului ”favourites”. Acesta are posibilitatea de a își vizualiza melodiile favorite într-un tabel. 
