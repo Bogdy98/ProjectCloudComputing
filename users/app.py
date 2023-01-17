@@ -11,7 +11,7 @@ def hello():
 
 @app.route('/users/create-table')
 def createTable():
-	with connect(host='mysqldb', user='root', password='p@ssw0rd1', database="projectdb") as connection:
+	with connect(host='mysql', user='root', password='p@ssw0rd1', database="projectdb") as connection:
 		try:
 			drop_table_query = "DROP TABLE IF EXISTS users"
 			create_table_query = "CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255), PRIMARY KEY (id))"
@@ -28,7 +28,7 @@ def createTable():
 def addUser():
 	if request.method == 'POST':
 		name = request.form['name']
-		with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+		with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 			insert_query = "INSERT INTO users (name) VALUES (%s)"
 			data_query = [name]
 			with connection.cursor() as cursor:
@@ -40,7 +40,7 @@ def addUser():
 	
 @app.route('/users')
 def getUsers():
-	with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+	with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 		select_query = "SELECT * FROM users"
 		with connection.cursor() as cursor:
 			cursor.execute(select_query)

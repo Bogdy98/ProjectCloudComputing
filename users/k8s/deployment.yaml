@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users
+  namespace: default
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: users
+  template:
+    metadata:
+      labels:
+        app: users
+    spec:
+      containers:
+        - name: users
+          image: 127.0.0.1:32000/users:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5002
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

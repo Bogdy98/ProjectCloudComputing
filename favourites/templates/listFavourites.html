@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
 <nav style="text-align: center; padding: 10px;">
-	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8001/artists/add">Add artist</a>
-	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8001/artists">Artists list</a>
-	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8001/songs/add">Add song</a>
-	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8001/songs">Songs list</a>
-	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8002/users/add">Add user</a>
-	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8002/users">Users list</a>
+	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30100/artists/add">Add artist</a>
+	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30100/artists">Artists list</a>
+	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30100/songs/add">Add song</a>
+	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30100/songs">Songs list</a>
+	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30101/users/add">Add user</a>
+	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30101/users">Users list</a>
 </nav>
 <hr>
 
@@ -24,7 +24,7 @@
 		<td style="padding: 10px;">{{ favourite['favourite.id'] }}</td>
 		<td style="padding: 10px;">{{ favourite['user.name'] }}</td>
 		<td style="padding: 10px;">{{ favourite['song.name'] }}</td>
-		<td style="padding: 10px;"><a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8003/favourites/delete/{{favourite['favourite.id']}}">Delete</a></td>
+		<td style="padding: 10px;"><a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30102/favourites/delete/{{favourite['favourite.id']}}">Delete</a></td>
 	</tr>
 {% endfor %}
 </table>

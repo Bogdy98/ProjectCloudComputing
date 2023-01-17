@@ -11,7 +11,7 @@ def hello():
 
 @app.route('/likes/create-table')
 def createTableLikes():
-	with connect(host='mysqldb', user='root', password='p@ssw0rd1', database="projectdb") as connection:
+	with connect(host='mysql', user='root', password='p@ssw0rd1', database="projectdb") as connection:
 		try:
 			drop_table_query = "DROP TABLE IF EXISTS likes"
 			create_table_query = "CREATE TABLE likes (id INT NOT NULL AUTO_INCREMENT, userId INT, songId INT, PRIMARY KEY (id), FOREIGN KEY(userId) REFERENCES users(id), FOREIGN KEY(songId) REFERENCES songs(id))"
@@ -26,7 +26,7 @@ def createTableLikes():
 
 @app.route('/comments/create-table')
 def createTableComments():
-	with connect(host='mysqldb', user='root', password='p@ssw0rd1', database="projectdb") as connection:
+	with connect(host='mysql', user='root', password='p@ssw0rd1', database="projectdb") as connection:
 		try:
 			drop_table_query = "DROP TABLE IF EXISTS comments"
 			create_table_query = "CREATE TABLE comments (id INT NOT NULL AUTO_INCREMENT, comment VARCHAR(255), userId INT, songId INT, PRIMARY KEY (id), FOREIGN KEY(userId) REFERENCES users(id), FOREIGN KEY(songId) REFERENCES songs(id))"
@@ -43,7 +43,7 @@ def createTableComments():
 def addLike(songId):
 	if request.method == 'POST':
 		userName = request.form['userName']
-		with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+		with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 			
 			select_query_1 = "SELECT name FROM songs WHERE id = %s"
 			data_select_query_1 = [songId]
@@ -92,7 +92,7 @@ def addLike(songId):
 			with connection.cursor() as cursor:
 				cursor.execute(insert_query, data_insert_query)
 				connection.commit()
-				return redirect("http://localhost:8004/likes/%s" %(songId))
+				return redirect("http://localhost:30103/likes/%s" %(songId))
 	
 	return render_template('addLike.html')
 
@@ -101,7 +101,7 @@ def addComment(songId):
 	if request.method == 'POST':
 		comment = request.form['comment']
 		userName = request.form['userName']
-		with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+		with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 			
 			select_query_1 = "SELECT name FROM songs WHERE id = %s"
 			data_select_query_1 = [songId]
@@ -137,13 +137,13 @@ def addComment(songId):
 			with connection.cursor() as cursor:
 				cursor.execute(insert_query, data_insert_query)
 				connection.commit()
-				return redirect("http://localhost:8004/comments/%s" %(songId))
+				return redirect("http://localhost:30103/comments/%s" %(songId))
 	
 	return render_template('addComment.html')
 
 @app.route('/likes/<songId>')
 def getLikes(songId):
-	with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+	with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 		select_query = """SELECT l.id AS 'like.id', u.name AS 'user.name', s.name AS 'song.name'
 		FROM likes l
 		JOIN users u ON l.userId = u.id
@@ -164,7 +164,7 @@ def getLikes(songId):
 
 @app.route('/comments/<songId>')
 def getComments(songId):
-	with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+	with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 		select_query = """SELECT c.id AS 'comment.id', c.comment AS 'comment.comment', u.name AS 'user.name', s.name AS 'song.name'
 		FROM comments c
 		JOIN users u ON c.userId = u.id
@@ -185,7 +185,7 @@ def getComments(songId):
 
 @app.route('/likes/delete/<id>')
 def deleteLike(id):
-	with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+	with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 		select_query = "SELECT * FROM likes WHERE id = %s"
 		data_select_query = [id]
 		with connection.cursor() as cursor:
@@ -204,11 +204,11 @@ def deleteLike(id):
 		with connection.cursor() as cursor:
 			cursor.execute(delete_query, data_delete_query)
 			connection.commit()
-			return redirect("http://localhost:8001/songs")
+			return redirect("http://localhost:30100/songs")
 
 @app.route('/comments/delete/<id>')
 def deleteComment(id):
-	with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+	with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 		select_query = "SELECT * FROM comments WHERE id = %s"
 		data_select_query = [id]
 		with connection.cursor() as cursor:
@@ -227,13 +227,13 @@ def deleteComment(id):
 		with connection.cursor() as cursor:
 			cursor.execute(delete_query, data_delete_query)
 			connection.commit()
-			return redirect("http://localhost:8001/songs")
+			return redirect("http://localhost:30100/songs")
 
 @app.route('/likes/deleteLikeBySongId/<songId>', methods=('GET', 'POST'))
 def deleteLikeBySongId(songId):
 	if request.method == 'POST':
 		userName = request.form['userName']
-		with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+		with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 			select_query_1 = "SELECT name FROM songs WHERE id = %s"
 			data_select_query_1 = [songId]
 			with connection.cursor() as cursor:
@@ -280,7 +280,7 @@ def deleteLikeBySongId(songId):
 			with connection.cursor() as cursor:
 				cursor.execute(delete_query, data_delete_query)
 				connection.commit()
-				return redirect("http://localhost:8001/songs")
+				return redirect("http://localhost:30100/songs")
 	
 	return render_template('deleteLike.html')
 

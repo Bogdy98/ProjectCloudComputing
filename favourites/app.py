@@ -11,7 +11,7 @@ def hello():
 
 @app.route('/favourites/create-table')
 def createTable():
-	with connect(host='mysqldb', user='root', password='p@ssw0rd1', database="projectdb") as connection:
+	with connect(host='mysql', user='root', password='p@ssw0rd1', database="projectdb") as connection:
 		try:
 			drop_table_query = "DROP TABLE IF EXISTS favourites"
 			create_table_query = "CREATE TABLE favourites (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255), userId INT, songId INT, PRIMARY KEY (id), FOREIGN KEY(userId) REFERENCES users(id), FOREIGN KEY(songId) REFERENCES songs(id))"
@@ -29,7 +29,7 @@ def addFavourite(userId):
 	if request.method == 'POST':
 		#userName = request.form['userName']
 		songName = request.form['songName']
-		with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+		with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 			
 			#select_query_1 = "SELECT id FROM users WHERE name = %s"
 			#data_select_query_1 = [userName]
@@ -93,13 +93,13 @@ def addFavourite(userId):
 				cursor.execute(insert_query, data_insert_query)
 				connection.commit()
 				#return redirect(url_for('getFavourites'))
-				return redirect("http://localhost:8003/favourites/%s" %(userId))
+				return redirect("http://localhost:30102/favourites/%s" %(userId))
 	
 	return render_template('addFavourite.html')
 	
 @app.route('/favourites/<userId>')
 def getFavourites(userId):
-	with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+	with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 		select_query = """SELECT f.id AS 'favourite.id', u.name AS 'user.name', s.name AS 'song.name'
 		FROM favourites f
 		JOIN users u ON f.userId = u.id AND u.id = %s
@@ -120,7 +120,7 @@ def getFavourites(userId):
 
 @app.route('/favourites/delete/<id>')
 def deleteFavourite(id):
-	with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+	with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 		select_query = "SELECT * FROM favourites WHERE id = %s"
 		data_select_query = [id]
 		with connection.cursor() as cursor:
@@ -139,7 +139,7 @@ def deleteFavourite(id):
 		with connection.cursor() as cursor:
 			cursor.execute(delete_query, data_delete_query)
 			connection.commit()
-			return redirect("http://localhost:8002/users")
+			return redirect("http://localhost:30101/users")
 
 class Favourite:
 	def __init__(self, id, name, userId, songId):

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: likes
+  namespace: default
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: likes
+  template:
+    metadata:
+      labels:
+        app: likes
+    spec:
+      containers:
+        - name: likes
+          image: 127.0.0.1:32000/likes:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5004
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

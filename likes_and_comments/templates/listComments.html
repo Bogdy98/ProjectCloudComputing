@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
 <nav style="text-align: center; padding: 10px;">
-	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8001/artists/add">Add artist</a>
-	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8001/artists">Artists list</a>
-	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8001/songs/add">Add song</a>
-	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8001/songs">Songs list</a>
-	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8002/users/add">Add user</a>
-	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8002/users">Users list</a>
+	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30100/artists/add">Add artist</a>
+	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30100/artists">Artists list</a>
+	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30100/songs/add">Add song</a>
+	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30100/songs">Songs list</a>
+	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30101/users/add">Add user</a>
+	<a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30101/users">Users list</a>
 </nav>
 <hr>
 
@@ -26,7 +26,7 @@
 		<td style="padding: 10px;">{{ comment['user.name'] }}</td>
 		<td style="padding: 10px;">{{ comment['song.name'] }}</td>
 		<td style="padding: 10px;">{{ comment['comment.comment'] }}</td>
-		<td style="padding: 10px;"><a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:8004/comments/delete/{{comment['comment.id']}}">Delete</a></td>
+		<td style="padding: 10px;"><a style="text-decoration: none; color:black; padding: 10px;" href="http://localhost:30103/comments/delete/{{comment['comment.id']}}">Delete</a></td>
 	</tr>
 {% endfor %}
 </table>

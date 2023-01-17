@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: favorites
+  namespace: default
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: favorites
+  template:
+    metadata:
+      labels:
+        app: favorites
+    spec:
+      containers:
+        - name: favorites
+          image: 127.0.0.1:32000/favorites:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5003
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
