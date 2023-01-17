@@ -12,7 +12,7 @@ def hello():
 
 @app.route('/create-database')
 def createDatabase():
-	with connect(host='mysqldb', user='root', password='p@ssw0rd1') as connection:
+	with connect(host='mysql', user='root', password='p@ssw0rd1') as connection:
 		try:
 			drop_database_query = "DROP DATABASE IF EXISTS projectdb"
 			create_database_query = "CREATE DATABASE projectdb"
@@ -27,7 +27,7 @@ def createDatabase():
 
 @app.route('/artists/create-table')
 def createTableArtists():
-	with connect(host='mysqldb', user='root', password='p@ssw0rd1', database="projectdb") as connection:
+	with connect(host='mysql', user='root', password='p@ssw0rd1', database="projectdb") as connection:
 		try:
 			drop_table_query = "DROP TABLE IF EXISTS artists"
 			create_table_query = "CREATE TABLE artists (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255), PRIMARY KEY (id))"
@@ -42,7 +42,7 @@ def createTableArtists():
 
 @app.route('/songs/create-table')
 def createTableSongs():
-	with connect(host='mysqldb', user='root', password='p@ssw0rd1', database="projectdb") as connection:
+	with connect(host='mysql', user='root', password='p@ssw0rd1', database="projectdb") as connection:
 		try:
 			drop_table_query = "DROP TABLE IF EXISTS songs"
 			create_table_query = "CREATE TABLE songs (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255), artistId INT, PRIMARY KEY (id), FOREIGN KEY(artistId) REFERENCES artists(id))"
@@ -59,7 +59,7 @@ def createTableSongs():
 def addArtist():
 	if request.method == 'POST':
 		name = request.form['name']
-		with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+		with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 			insert_query = "INSERT INTO artists (name) VALUES (%s)"
 			data_query = [name]
 			with connection.cursor() as cursor:
@@ -71,7 +71,7 @@ def addArtist():
 
 @app.route('/artists')
 def getArtists():
-	with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+	with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 		select_query = "SELECT * FROM artists"
 		with connection.cursor() as cursor:
 			cursor.execute(select_query)
@@ -90,7 +90,7 @@ def addSong():
 	if request.method == 'POST':
 		name = request.form['name']
 		artistName = request.form['artistName']
-		with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+		with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 			select_query = "SELECT id FROM artists WHERE name = %s"
 			data_select_query = [artistName]
 			with connection.cursor() as cursor:
@@ -116,7 +116,7 @@ def addSong():
 	
 @app.route('/songs')
 def getSongs():
-	with connect(host='mysqldb', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
+	with connect(host='mysql', user='root',password='p@ssw0rd1' ,database='projectdb') as connection:
 		select_query = """SELECT s.id AS 'song.id', s.name AS 'song.name', a.name AS 'artist.name', (
 			SELECT COUNT(l.id)
 			FROM likes l
