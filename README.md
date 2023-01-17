@@ -1,8 +1,10 @@
 # ProjectCloudComputing
 În cadrul acestui proiect am implementat patru microservicii, numite „**songs**”, „**users**”, ”**likes_and_comments**” și „**favourites**”. Serviciul ”**songs**” conține expunerea pentru crearea bazei de date și a tabelelor ”songs” și ”artists”. Pe lângă acestea, serviciul conține metodele de adăugare și citire a artiștilor, respectiv cântecelor în baza de date.   
+
 Serviciul ”**users**” gestionează operațiile asupra utilizatorilor din aplicație. Un utilizator poate alege mai multe cântece favorite prin intermediul microserviciului ”favourites”. Acesta are posibilitatea de a își vizualiza melodiile favorite într-un tabel. 
 Fiecare cântec poate primi like-uri și comentarii din partea utilizatorilor în funcție de opiniile acestora. Pentru fiecare cântec va fi afișat numărul de like-uri primite. 
- Aplicația conține o singură bază de date reprezentată de o imagine Docker MYSQL, numită mysqldb. Containerele sunt pornite folosind docker compose. 
+
+Aplicația conține o singură bază de date reprezentată de o imagine Docker MYSQL, numită mysqldb. Containerele sunt pornite folosind docker compose. 
    
 **Tehnologii folosite pentru kubernetes**
 
